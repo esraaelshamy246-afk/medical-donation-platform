@@ -1,0 +1,175 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fullName": "Ahmed Ali",
+      "email": "ahmed@example.com",
+      "phone": "01000000001",
+      "location": "Cairo",
+      "accountType": "Individual",
+      "role": "user"
+    },
+    {
+      "id": 2,
+      "fullName": "Nour Medical Organization",
+      "email": "nour@example.com",
+      "phone": "01000000002",
+      "location": "Mansoura",
+      "accountType": "Organization",
+      "role": "user"
+    }
+  ],
+  "medicines": [
+    {
+      "id": 1,
+      "name": "Paracetamol",
+      "category": "Medicines",
+      "quantity": 50,
+      "expiryDate": "2027-06-15",
+      "location": "Cairo",
+      "condition": "Sealed",
+      "image": "",
+      "description": "Unused medicine in good condition.",
+      "status": "Available",
+      "donorId": 1,
+      "createdAt": "2026-08-01"
+    },
+    {
+      "id": 2,
+      "name": "Medical Gloves",
+      "category": "Medical Supplies",
+      "quantity": 100,
+      "expiryDate": "2028-01-20",
+      "location": "Mansoura",
+      "condition": "New",
+      "image": "",
+      "description": "Unused medical gloves.",
+      "status": "Available",
+      "donorId": 2,
+      "createdAt": "2026-08-03"
+    },
+    {
+      "id": 3,
+      "name": "Blood Pressure Monitor",
+      "category": "Medical Equipment",
+      "quantity": 2,
+      "expiryDate": "2029-02-10",
+      "location": "Giza",
+      "condition": "Good",
+      "image": "",
+      "description": "Used but working medical equipment.",
+      "status": "Available",
+      "donorId": 1,
+      "createdAt": "2026-08-05"
+    }
+  ],
+  "donations": [
+    {
+      "id": 1,
+      "productName": "Paracetamol",
+      "category": "Medicines",
+      "quantity": 50,
+      "expiryDate": "2027-06-15",
+      "location": "Cairo",
+      "condition": "Sealed",
+      "image": "",
+      "description": "Unused medicine in good condition.",
+      "status": "Approved",
+      "donorId": 1,
+      "createdAt": "2026-08-01"
+    },
+    {
+      "id": 2,
+      "productName": "Medical Gloves",
+      "category": "Medical Supplies",
+      "quantity": 100,
+      "expiryDate": "2028-01-20",
+      "location": "Mansoura",
+      "condition": "New",
+      "image": "",
+      "description": "Unused medical gloves.",
+      "status": "Pending",
+      "donorId": 2,
+      "createdAt": "2026-08-03"
+    }
+  ],
+  "requests": [
+    {
+      "id": 1,
+      "product": "Paracetamol",
+      "category": "Medicines",
+      "quantity": 10,
+      "location": "Cairo",
+      "description": "Needed for a local patient support case.",
+      "priority": "Normal",
+      "status": "Pending",
+      "requesterId": 2,
+      "createdAt": "2026-08-10"
+    },
+    {
+      "id": 2,
+      "product": "Medical Supplies",
+      "category": "Medical Supplies",
+      "quantity": 10,
+      "location": "Mansoura",
+      "description": "Urgently needed medical supplies.",
+      "priority": "Urgent",
+      "status": "Under Review",
+      "requesterId": 2,
+      "createdAt": "2026-08-11"
+    },
+    {
+      "id": 3,
+      "product": "Blood Pressure Monitor",
+      "category": "Medical Equipment",
+      "quantity": 1,
+      "location": "Giza",
+      "description": "Required for home medical care.",
+      "priority": "Normal",
+      "status": "Matched",
+      "requesterId": 1,
+      "createdAt": "2026-08-12"
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "message": "Your donation has been approved.",
+      "type": "Donation",
+      "read": false,
+      "createdAt": "2026-08-02"
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "message": "Your request has been matched.",
+      "type": "Request",
+      "read": false,
+      "createdAt": "2026-08-13"
+    }
+  ],
+  "faqs": [
+    {
+      "id": 1,
+      "question": "What is Ata Platform?",
+      "answer": "A platform for donating usable surplus medicines and medical supplies."
+    },
+    {
+      "id": 2,
+      "question": "How can I donate?",
+      "answer": "Create an account, complete the donation form, and submit it for review."
+    },
+    {
+      "id": 3,
+      "question": "Are all donations accepted?",
+      "answer": "Donations are reviewed before they are approved."
+    },
+    {
+      "id": 4,
+      "question": "How can I request medicine?",
+      "answer": "Create a request with the product, quantity, location, description, and priority."
+    }
+  ],
+  "contacts": []
+}
