@@ -164,7 +164,7 @@ onMounted(() => {
   color: #0f766e;
 }
 
-/* Animations for Smooth Filtering */
+
 .list-enter-active,
 .list-leave-active {
   transition: all 0.4s ease;

@@ -79,7 +79,6 @@ function showDetails() {
   color: #1d4ed8;
 }
 
-/* Urgent Case Styling */
 .urgent-card {
   border: 1.5px solid #fca5a5 !important;
   background: linear-gradient(180deg, #fff5f5 0%, #ffffff 100%);
@@ -91,8 +90,6 @@ function showDetails() {
   border: 1px solid #fca5a5;
   font-weight: 600;
 }
-
-/* Color Palette */
 .bg-blue-light { background-color: #eff6ff; }
 .text-blue { color: #1d4ed8; }
 .border-blue-light { border-color: #dbeafe; }
@@ -108,7 +105,7 @@ function showDetails() {
 .text-green { color: #15803d; }
 .border-green-light { border-color: #bbf7d0; }
 
-/* Royal Blue Button */
+
 .btn-blue-action {
   background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   color: #ffffff;
