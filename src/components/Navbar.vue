@@ -13,14 +13,59 @@
       <RouterLink to="/contact">Contact Us</RouterLink>
     </div>
 
-    <div class="auth-buttons">
-      <RouterLink to="/login" class="login-btn">Login</RouterLink>
-      <RouterLink to="/register" class="register-btn">
-        Register
-      </RouterLink>
-    </div>
+   <div class="auth-buttons">
+  <template v-if="!isLoggedIn">
+    <RouterLink to="/auth" class="login-btn">
+      Login
+    </RouterLink>
+
+    <RouterLink to="/auth" class="register-btn">
+      Register
+    </RouterLink>
+  </template>
+
+  <template v-else>
+    <RouterLink to="/dashboard" class="login-btn">
+      Dashboard
+    </RouterLink>
+
+    <button class="register-btn" @click="logout">
+      Logout
+    </button>
+  </template>
+</div>
   </nav>
 </template>
+
+
+<script setup>
+import { ref, onMounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const isLoggedIn = ref(false)
+
+const checkLogin = () => {
+  isLoggedIn.value = !!localStorage.getItem('user')
+}
+
+onMounted(() => {
+  checkLogin()
+})
+
+watch(
+  () => route.path,
+  () => {
+    checkLogin()
+  }
+)
+
+const logout = () => {
+  localStorage.removeItem('user')
+  isLoggedIn.value = false
+}
+</script>
+
 
 <style scoped>
 .navbar {

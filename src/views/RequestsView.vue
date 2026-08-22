@@ -468,6 +468,7 @@ const offerDonation = (request) => {
 
 :deep(.modal-subtitle) {
   color: #777;
+}
 
 .list-enter-active,
 .list-leave-active {

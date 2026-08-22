@@ -161,7 +161,7 @@ import SectionTitle from '../components/SectionTitle.vue'
         </div>
       </div>
 
-      <RouterLink to="/requests/1" class="request-btn">
+      <RouterLink to="/requests" class="request-btn">
         View Request
       </RouterLink>
     </div>
@@ -190,7 +190,7 @@ import SectionTitle from '../components/SectionTitle.vue'
         </div>
       </div>
 
-      <RouterLink to="/requests/1" class="request-btn">
+      <RouterLink to="/requests" class="request-btn">
         View Request
       </RouterLink>
     </div>
@@ -219,7 +219,7 @@ import SectionTitle from '../components/SectionTitle.vue'
         </div>
       </div>
 
-      <RouterLink to="/requests/1" class="request-btn">
+      <RouterLink to="/requests" class="request-btn">
         View Request
       </RouterLink>
     </div>
