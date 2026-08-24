@@ -6,6 +6,10 @@ import RequestsView from '../views/RequestsView.vue'
 import UserDashboardView from '../views/UserDashboardView.vue'
 import AdminDashboardView from '../views/AdminDashboardView.vue'
 
+import AboutView from '../views/AboutView.vue'
+import ContactView from '../views/ContactView.vue'
+import FaqView from '../views/FaqView.vue'
+
 const routes = [
   {
     path: '/',
@@ -23,9 +27,9 @@ const routes = [
     component: RequestsView
   },
   {
-  path: '/requests/:id',
-  name: 'RequestDetails',
-  component: RequestsView
+    path: '/requests/:id',
+    name: 'RequestDetails',
+    component: RequestsView
   },
   {
     path: '/dashboard',
@@ -36,6 +40,21 @@ const routes = [
     path: '/admin',
     name: 'AdminDashboard',
     component: AdminDashboardView
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: AboutView
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: ContactView
+  },
+  {
+    path: '/faq',
+    name: 'FAQ',
+    component: FaqView
   }
 ]
 
