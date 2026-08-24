@@ -1,164 +1,264 @@
 <template>
-  <div v-if="isOpen" class="modal fade show d-block modal-backdrop-custom">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content border-0 shadow-lg modal-radius overflow-hidden">
-        <div class="modal-header modal-header-custom p-4 text-white">
-          <h5 class="modal-title fw-bold">Create New Request</h5>
-          <button type="button" class="btn-close btn-close-white" @click="close"></button>
+  <div class="modal-overlay" @click.self="$emit('close')">
+    <div class="request-modal">
+      <button class="close-button" @click="$emit('close')">×</button>
+
+      <h2>Create Request</h2>
+      <p class="modal-subtitle">
+        Add the medicine or medical supplies you need.
+      </p>
+
+      <form @submit.prevent="submitRequest">
+        <div class="form-group">
+          <label>Product Name</label>
+          <input
+            v-model="form.product"
+            type="text"
+            placeholder="Enter product name"
+            required
+          />
         </div>
-        <div class="modal-body p-4 bg-white">
-          <form @submit.prevent="submit">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label fw-medium text-secondary">Medicine / Equipment</label>
-                <input v-model="medicineName" type="text" class="form-control form-control-custom" placeholder="e.g. Insulin Glargine" required />
-              </div>
 
-              <div class="col-md-6">
-                <label class="form-label fw-medium text-secondary">Category</label>
-                <select v-model="category" class="form-select form-control-custom">
-                  <option value="Medicines">Medicines</option>
-                  <option value="Medical Supplies">Medical Supplies</option>
-                  <option value="Medical Equipment">Medical Equipment</option>
-                </select>
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label fw-medium text-secondary">Patient Name</label>
-                <input v-model="patientName" type="text" class="form-control form-control-custom" placeholder="Full Name" required />
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label fw-medium text-secondary">City / Location</label>
-                <input v-model="location" type="text" class="form-control form-control-custom" placeholder="e.g. Cairo" required />
-              </div>
-
-              <div class="col-md-6">
-                <label class="form-label fw-medium text-secondary">Phone Number</label>
-                <input v-model="phone" type="text" class="form-control form-control-custom" placeholder="01xxxxxxxxx" required />
-              </div>
-
-              <div class="col-md-6 d-flex align-items-center pt-3">
-                <div class="form-check form-switch">
-                  <input v-model="isUrgent" class="form-check-input" type="checkbox" id="urgentCheck" />
-                  <label class="form-check-label text-danger fw-bold ms-2" for="urgentCheck">
-                    Is Urgent Case? ⚡
-                  </label>
-                </div>
-              </div>
-
-              <div class="col-12">
-                <label class="form-label fw-medium text-secondary">Details / Notes</label>
-                <textarea v-model="description" class="form-control form-control-custom" rows="3" placeholder="Write any additional details..." required></textarea>
-              </div>
-            </div>
-
-            <div class="mt-4 pt-3 border-top d-flex justify-content-end gap-2">
-              <button type="button" class="btn btn-light px-4 rounded-3 border" @click="close">Cancel</button>
-              <button type="submit" class="btn btn-submit px-4 rounded-3 text-white fw-semibold" :disabled="loading">
-                Save Request
-              </button>
-            </div>
-          </form>
+        <div class="form-group">
+          <label>Category</label>
+          <select v-model="form.category" required>
+            <option value="">Select category</option>
+            <option value="Medicine">Medicine</option>
+            <option value="Medical Supplies">Medical Supplies</option>
+            <option value="Equipment">Equipment</option>
+          </select>
         </div>
-      </div>
+
+        <div class="form-group">
+          <label>Quantity</label>
+          <input
+            v-model.number="form.quantity"
+            type="number"
+            min="1"
+            placeholder="Enter quantity"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Location</label>
+          <input
+            v-model="form.location"
+            type="text"
+            placeholder="Enter location"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Description</label>
+
+          <textarea
+            v-model="form.description"
+            placeholder="Explain why you need this request..."
+            rows="3"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Priority</label>
+          <div class="priority-options">
+            <label class="radio-label" :class="{ active: form.priority === 'Normal' }">
+              <input v-model="form.priority" type="radio" value="Normal" />
+              Normal
+            </label>
+            <label class="radio-label urgent" :class="{ active: form.priority === 'Urgent' }">
+              <input v-model="form.priority" type="radio" value="Urgent" />
+              Urgent
+            </label>
+          </div>
+        </div>
+
+        <button class="submit-button" type="submit">
+          Create Request
+        </button>
+      </form>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { reactive } from 'vue'
 
-const props = defineProps({
-  isOpen: Boolean
+const emit = defineEmits(['close', 'submit'])
+
+const form = reactive({
+  product: '',
+  category: '',
+  quantity: '',
+  location: '',
+  description: '',
+  priority: 'Normal'
 })
 
-const emit = defineEmits(['close', 'created'])
-
-const medicineName = ref('')
-const category = ref('Medicines')
-const patientName = ref('')
-const location = ref('')
-const phone = ref('')
-const isUrgent = ref(false)
-const description = ref('')
-const loading = ref(false)
-
-function close() {
-  emit('close')
-}
-
-async function submit() {
-  loading.value = true
-  const newRequest = {
-    medicineName: medicineName.value,
-    category: category.value,
-    patientName: patientName.value,
-    location: location.value,
-    phone: phone.value,
-    isUrgent: isUrgent.value,
-    description: description.value,
+const submitRequest = () => {
+  emit('submit', {
+    ...form,
     status: 'Pending',
-    createdAt: new Date().toISOString().split('T')[0]
-  }
-
-  try {
-    const res = await fetch('http://localhost:3000/requests', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newRequest)
-    })
-    
-    if (res.ok) {
-      const data = await res.json()
-      emit('created', data)
-      close()
-      medicineName.value = ''
-      patientName.value = ''
-      location.value = ''
-      phone.value = ''
-      description.value = ''
-      isUrgent.value = false
-    }
-  } catch (error) {
-    console.log('Error:', error)
-  } finally {
-    loading.value = false
-  }
+    date: new Date().toLocaleDateString()
+  })
 }
 </script>
 
 <style scoped>
-.modal-backdrop-custom {
-  background: rgba(15, 23, 42, 0.45);
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(38, 70, 83, 0.4);
   backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
 }
 
-.modal-radius {
-  border-radius: 20px;
+.request-modal {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 12px;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid #eef2f5;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-.modal-header-custom {
-  background: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
-}
-
-.form-control-custom {
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  padding: 10px 14px;
-}
-
-.form-control-custom:focus {
-  border-color: #0f766e;
-  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
-}
-
-.btn-submit {
-  background-color: #0f766e;
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
   border: none;
+  font-size: 26px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.2s;
 }
 
-.btn-submit:hover {
-  background-color: #115e59;
+.close-button:hover {
+  color: #264653;
+}
+
+h2 {
+  color: #264653;
+  margin: 0 0 6px 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.modal-subtitle {
+  color: #6c757d;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #264653;
+  margin-bottom: 6px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #333;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #2a9d8f;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.15);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.priority-options {
+  display: flex;
+  gap: 15px;
+  margin-top: 6px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.radio-label input {
+  accent-color: #2a9d8f;
+}
+
+.radio-label.active {
+  border-color: #2a9d8f;
+  background: #e8f5f3;
+  color: #2a9d8f;
+}
+
+.radio-label.urgent.active {
+  border-color: #e76f51;
+  background: #fdf2f0;
+  color: #e76f51;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 12px;
+  background: #2a9d8f;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.submit-button:hover {
+  background: #238377;
+}
+
+.submit-button:active {
+  transform: scale(0.99);
 }
 </style>
