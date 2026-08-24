@@ -1,55 +1,71 @@
 <template>
-      <div class="notification-item" :class="{ unread: !notification.isRead }">
-          <div class="icon">
-                <i class="bx bx-bell"></i>
-                    </div>
-                        <div class="content">
-                              <p class="message">{{ notification.message }}</p>
-                                    <span class="time">{{ notification.time }}</span>
-                                        </div>
-                                          </div>
-                                          </template>
+  <div class="notification-item" :class="{ unread: !notification.isRead }">
+    <div class="icon">
+      <i class="bx bx-bell"></i>
+    </div>
+    <div class="content">
+      <p class="message">{{ notification.message }}</p>
+      <span class="time">{{ notification.time }}</span>
+    </div>
+  </div>
+</template>
 
-                                          <script setup>
-                                          defineProps({
-                                            notification: {
-                                                type: Object,
-                                                    required: true
-                                                      }
-                                                      });
-                                                      </script>
+<script setup>
+defineProps({
+  notification: {
+    type: Object,
+    required: true
+  }
+});
+</script>
 
-                                                      <style scoped>
-                                                      .notification-item {
-                                                        display: flex;
-                                                          align-items: center;
-                                                            gap: 15px;
-                                                              padding: 12px 15px;
-                                                                border-radius: 8px;
-                                                                  background: rgba(255, 255, 255, 0.03);
-                                                                    border: 1px solid rgba(255, 255, 255, 0.08);
-                                                                      margin-bottom: 10px;
-                                                                      }
+<style scoped>
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #eef2f5;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
 
-                                                                      .notification-item.unread {
-                                                                        border-left: 4px solid #0ef;
-                                                                          background: rgba(0, 238, 255, 0.05);
-                                                                          }
+.notification-item.unread {
+  border-left: 4px solid #2a9d8f;
+  background: #f4f9f8;
+}
 
-                                                                          .icon {
-                                                                            font-size: 20px;
-                                                                              color: #0ef;
-                                                                              }
+.icon {
+  font-size: 22px;
+  color: #2a9d8f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: #e8f5f3;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
 
-                                                                              .message {
-                                                                                margin: 0;
-                                                                                  font-size: 14px;
-                                                                                    color: #fff;
-                                                                                    }
+.content {
+  flex-grow: 1;
+}
 
-                                                                                    .time {
-                                                                                      font-size: 12px;
-                                                                                        color: #888;
-                                                                                        }
-                                                                                        </style>
-                                                                                        
+.message {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  color: #264653;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.time {
+  font-size: 12px;
+  color: #8d99ae;
+  font-weight: 400;
+}
+</style>

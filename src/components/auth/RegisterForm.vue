@@ -1,190 +1,175 @@
 <template>
-      <form @submit.prevent="handleRegister">
-          <div class="input-box">
-                <input type="text" v-model="form.fullName" required>
-                      <label>Full Name</label>
-                            <i class='bx bxs-user'></i>
-                                </div>
-                                    
-                                        <div class="input-box">
-                                              <input type="email" v-model="form.email" required>
-                                                    <label>Email</label>
-                                                          <i class='bx bxs-envelope'></i>
-                                                              </div>
+  <form @submit.prevent="handleSubmit" class="compact-form">
+    <div class="input-box">
+      <input type="text" v-model="fullName" placeholder="Full Name" required />
+      <i class="bx bxs-user icon"></i>
+    </div>
 
-                                                                  <div class="input-box">
-                                                                        <input type="password" v-model="form.password" required>
-                                                                              <label>Password</label>
-                                                                                    <i class='bx bxs-lock-alt'></i>
-                                                                                        </div>
+    <div class="input-box">
+      <input type="email" v-model="email" placeholder="Email" required />
+      <i class="bx bxs-envelope icon"></i>
+    </div>
 
-                                                                                            <div class="select-box">
-                                                                                                  <select v-model="form.accountType" required>
-                                                                                                          <option value="Individual">Individual</option>
-                                                                                                                  <option value="Organization">Organization</option>
-                                                                                                                        </select>
-                                                                                                                            </div>
+    <div class="input-box">
+      <input type="password" v-model="password" placeholder="Password" required />
+      <i class="bx bxs-lock-alt icon"></i>
+    </div>
 
-                                                                                                                                <button type="submit" class="btn">Sign Up</button>
-                                                                                                                                    
-                                                                                                                                        <div class="logreg-link">
-                                                                                                                                              <p>Already have an account? <a href="#" @click.prevent="$emit('switchToLogin')">Login</a></p>
-                                                                                                                                                  </div>
-                                                                                                                                                    </form>
-                                                                                                                                                    </template>
+    <div class="select-box">
+      <label class="select-label">Account Type</label>
+      <select v-model="accountType">
+        <option value="Individual">Individual</option>
+        <option value="Organization">Organization</option>
+      </select>
+    </div>
 
-                                                                                                                                                    <script setup>
-                                                                                                                                                    import { reactive } from 'vue'
-                                                                                                                                                    import { useRouter } from 'vue-router'
+    <button type="submit" class="btn-submit">Sign Up</button>
 
-                                                                                                                                                    const router = useRouter()
-                                                                                                                                                    defineEmits(['switchToLogin'])
+    <div class="login-link">
+      <span>Already have an account? </span>
+      <a href="#" @click.prevent="$emit('switchToLogin')">Login</a>
+    </div>
+  </form>
+</template>
 
-                                                                                                                                                    const form = reactive({
-                                                                                                                                                      fullName: '',
-                                                                                                                                                        email: '',
-                                                                                                                                                          password: '',
-                                                                                                                                                            accountType: 'Individual'
-                                                                                                                                                            })
+<script setup>
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-                                                                                                                                                            const handleRegister = () => {
-                                                                                                                                                              const newUser = {
-                                                                                                                                                                  id: Date.now(),
-                                                                                                                                                                      fullName: form.fullName,
-                                                                                                                                                                          email: form.email,
-                                                                                                                                                                              accountType: form.accountType,
-                                                                                                                                                                                  role: 'user'
-                                                                                                                                                                                    }
+const emit = defineEmits(['switchToLogin'])
+const router = useRouter()
 
-                                                                                                                                                                                      const existingUsers = JSON.parse(localStorage.getItem('registered_users') || '[]')
-                                                                                                                                                                                        existingUsers.push(newUser)
-                                                                                                                                                                                          localStorage.setItem('registered_users', JSON.stringify(existingUsers))
+const fullName = ref('')
+const email = ref('')
+const password = ref('')
+const accountType = ref('Individual')
 
-                                                                                                                                                                                            localStorage.setItem('user', JSON.stringify(newUser))
-                                                                                                                                                                                              router.push('/dashboard')
-                                                                                                                                                                                              }
-                                                                                                                                                                                              </script>
+const handleSubmit = () => {
+  const newUser = {
+    id: Date.now(),
+    fullName: fullName.value,
+    email: email.value,
+    password: password.value,
+    accountType: accountType.value,
+    role: 'user'
+  }
 
-                                                                                                                                                                                              <style scoped>
-                                                                                                                                                                                              .input-box {
-                                                                                                                                                                                                position: relative;
-                                                                                                                                                                                                  width: 100%;
-                                                                                                                                                                                                    height: 45px;
-                                                                                                                                                                                                      margin: 15px 0;
-                                                                                                                                                                                                      }
+  const existingUsers = JSON.parse(localStorage.getItem('registered_users') || '[]')
+  existingUsers.push(newUser)
+  localStorage.setItem('registered_users', JSON.stringify(existingUsers))
 
-                                                                                                                                                                                                      .input-box input {
-                                                                                                                                                                                                        width: 100%;
-                                                                                                                                                                                                          height: 100%;
-                                                                                                                                                                                                            background: transparent;
-                                                                                                                                                                                                              border: none;
-                                                                                                                                                                                                                outline: none;
-                                                                                                                                                                                                                  border-bottom: 2px solid #fff;
-                                                                                                                                                                                                                    padding-right: 23px;
-                                                                                                                                                                                                                      font-size: 15px;
-                                                                                                                                                                                                                        color: #fff;
-                                                                                                                                                                                                                          font-weight: 500;
-                                                                                                                                                                                                                            transition: .5s;
-                                                                                                                                                                                                                            }
+  localStorage.setItem('user', JSON.stringify(newUser))
 
-                                                                                                                                                                                                                            .input-box input:focus,
-                                                                                                                                                                                                                            .input-box input:valid {
-                                                                                                                                                                                                                              border-bottom-color: #0ef;
-                                                                                                                                                                                                                              }
+  if (router) {
+    router.push('/dashboard')
+  } else {
+    window.location.href = '/dashboard'
+  }
+}
+</script>
 
-                                                                                                                                                                                                                              .input-box label {
-                                                                                                                                                                                                                                position: absolute;
-                                                                                                                                                                                                                                  top: 50%;
-                                                                                                                                                                                                                                    left: 0;
-                                                                                                                                                                                                                                      transform: translateY(-50%);
-                                                                                                                                                                                                                                        font-size: 15px;
-                                                                                                                                                                                                                                          color: #fff;
-                                                                                                                                                                                                                                            pointer-events: none;
-                                                                                                                                                                                                                                              transition: .5s;
-                                                                                                                                                                                                                                              }
+<style scoped>
+.compact-form {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
 
-                                                                                                                                                                                                                                              .input-box input:focus ~ label,
-                                                                                                                                                                                                                                              .input-box input:valid ~ label {
-                                                                                                                                                                                                                                                top: -5px;
-                                                                                                                                                                                                                                                  color: #0ef;
-                                                                                                                                                                                                                                                  }
+.input-box {
+  position: relative;
+  margin-bottom: 10px;
+}
 
-                                                                                                                                                                                                                                                  .input-box i {
-                                                                                                                                                                                                                                                    position: absolute;
-                                                                                                                                                                                                                                                      top: 50%;
-                                                                                                                                                                                                                                                        right: 0;
-                                                                                                                                                                                                                                                          transform: translateY(-50%);
-                                                                                                                                                                                                                                                            font-size: 18px;
-                                                                                                                                                                                                                                                              color: #fff;
-                                                                                                                                                                                                                                                                transition: .5s;
-                                                                                                                                                                                                                                                                }
+.input-box input {
+  width: 100%;
+  height: 38px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ccc;
+  padding: 0 30px 0 5px;
+  font-size: 13px;
+  color: #264653;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
 
-                                                                                                                                                                                                                                                                .input-box input:focus ~ i,
-                                                                                                                                                                                                                                                                .input-box input:valid ~ i {
-                                                                                                                                                                                                                                                                  color: #0ef;
-                                                                                                                                                                                                                                                                  }
+.input-box input:focus {
+  border-bottom-color: #2a9d8f;
+}
 
-                                                                                                                                                                                                                                                                  .select-box {
-                                                                                                                                                                                                                                                                    margin: 15px 0;
-                                                                                                                                                                                                                                                                    }
+.input-box .icon {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #8d99ae;
+}
 
-                                                                                                                                                                                                                                                                    .select-box select {
-                                                                                                                                                                                                                                                                      width: 100%;
-                                                                                                                                                                                                                                                                        padding: 8px 10px;
-                                                                                                                                                                                                                                                                          background: #081b29;
-                                                                                                                                                                                                                                                                            color: #0ef;
-                                                                                                                                                                                                                                                                              border: 1px solid #0ef;
-                                                                                                                                                                                                                                                                                border-radius: 5px;
-                                                                                                                                                                                                                                                                                  outline: none;
-                                                                                                                                                                                                                                                                                  }
+.select-box {
+  margin-bottom: 12px;
+}
 
-                                                                                                                                                                                                                                                                                  .btn {
-                                                                                                                                                                                                                                                                                    position: relative;
-                                                                                                                                                                                                                                                                                      width: 100%;
-                                                                                                                                                                                                                                                                                        height: 45px;
-                                                                                                                                                                                                                                                                                          background: transparent;
-                                                                                                                                                                                                                                                                                            border: 2px solid #0ef;
-                                                                                                                                                                                                                                                                                              outline: none;
-                                                                                                                                                                                                                                                                                                border-radius: 40px;
-                                                                                                                                                                                                                                                                                                  cursor: pointer;
-                                                                                                                                                                                                                                                                                                    font-size: 16px;
-                                                                                                                                                                                                                                                                                                      color: #fff;
-                                                                                                                                                                                                                                                                                                        font-weight: 600;
-                                                                                                                                                                                                                                                                                                          z-index: 1;
-                                                                                                                                                                                                                                                                                                            overflow: hidden;
-                                                                                                                                                                                                                                                                                                            }
+.select-label {
+  display: block;
+  font-size: 11px;
+  color: #2a9d8f;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
 
-                                                                                                                                                                                                                                                                                                            .btn::before {
-                                                                                                                                                                                                                                                                                                              content: '';
-                                                                                                                                                                                                                                                                                                                position: absolute;
-                                                                                                                                                                                                                                                                                                                  top: -100%;
-                                                                                                                                                                                                                                                                                                                    left: 0;
-                                                                                                                                                                                                                                                                                                                      width: 100%;
-                                                                                                                                                                                                                                                                                                                        height: 300%;
-                                                                                                                                                                                                                                                                                                                          background: linear-gradient(#081b29, #0ef, #081b29, #0ef);
-                                                                                                                                                                                                                                                                                                                            z-index: -1;
-                                                                                                                                                                                                                                                                                                                              transition: .5s;
-                                                                                                                                                                                                                                                                                                                              }
+.select-box select {
+  width: 100%;
+  height: 36px;
+  background: #f8f9fa;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0 10px;
+  font-size: 13px;
+  color: #264653;
+  outline: none;
+  cursor: pointer;
+}
 
-                                                                                                                                                                                                                                                                                                                              .btn:hover::before {
-                                                                                                                                                                                                                                                                                                                                top: 0;
-                                                                                                                                                                                                                                                                                                                                }
+.btn-submit {
+  width: 100%;
+  height: 38px;
+  background: #2a9d8f;
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 4px;
+  position: relative;
+  z-index: 20;
+  pointer-events: auto;
+}
 
-                                                                                                                                                                                                                                                                                                                                .logreg-link {
-                                                                                                                                                                                                                                                                                                                                  font-size: 14px;
-                                                                                                                                                                                                                                                                                                                                    color: #fff;
-                                                                                                                                                                                                                                                                                                                                      text-align: center;
-                                                                                                                                                                                                                                                                                                                                        margin: 15px 0 5px;
-                                                                                                                                                                                                                                                                                                                                        }
+.btn-submit:hover {
+  background: #238377;
+}
 
-                                                                                                                                                                                                                                                                                                                                        .logreg-link p a {
-                                                                                                                                                                                                                                                                                                                                          color: #0ef;
-                                                                                                                                                                                                                                                                                                                                            text-decoration: none;
-                                                                                                                                                                                                                                                                                                                                              font-weight: 600;
-                                                                                                                                                                                                                                                                                                                                              }
+.login-link {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+  color: #6c757d;
+  position: relative;
+  z-index: 20;
+}
 
-                                                                                                                                                                                                                                                                                                                                              .logreg-link p a:hover {
-                                                                                                                                                                                                                                                                                                                                                text-decoration: underline;
-                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                </style>
-                                                                                                                                                                                                                                                                                                                                                
+.login-link a {
+  color: #2a9d8f;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+</style>
