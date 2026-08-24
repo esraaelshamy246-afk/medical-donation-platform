@@ -1,9 +1,12 @@
 <template>
-  <div class="request-card">
+  <div 
+    class="request-card" 
+    :class="{ 'urgent-card': request.priority === 'Urgent' }"
+  >
     <div class="card-top">
       <div>
-        <h3>{{ request.product }}</h3>
-        <span class="category">{{ request.category }}</span>
+        <h3 class="product-title">{{ request.product }}</h3>
+        <span class="category-tag">{{ request.category }}</span>
       </div>
 
       <span
@@ -34,7 +37,7 @@
     <div class="card-bottom">
       <RequestStatus :status="request.status" />
 
-      <button @click="$emit('view', request)">
+      <button class="btn-action" @click="$emit('view', request)">
         View Details
       </button>
     </div>
