@@ -484,14 +484,11 @@ const offerDonation = (request) => {
 }
 
 :deep(.modal-subtitle) {
-<<<<<<< HEAD
-  color: #777;
-=======
+
   color: #6c757d;
   font-size: 14px;
   margin-bottom: 20px;
 }
->>>>>>> 503cf00 (Save modifications)
 
 .list-enter-active,
 .list-leave-active {
