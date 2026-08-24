@@ -186,6 +186,7 @@ const urgentRequests = computed(() => {
   )
 })
 
+
 const filteredRequests = computed(() => {
   return requests.value.filter(request => {
 
@@ -269,7 +270,7 @@ const offerDonation = (request) => {
 
 .create-button {
   border: none;
-  background: #2f7d5a;
+  background: #2a9d8f;
   color: white;
   padding: 12px 20px;
   border-radius: 8px;
@@ -357,7 +358,7 @@ const offerDonation = (request) => {
 :deep(.card-bottom button),
 :deep(.urgent-card button) {
   border: none;
-  background: #2f7d5a;
+  background: #2a9d8f;
   color: white;
   padding: 9px 14px;
   border-radius: 6px;
@@ -499,7 +500,7 @@ const offerDonation = (request) => {
 :deep(.donate-button) {
   width: 100%;
   border: none;
-  background: #2f7d5a;
+  background: #2a9d8f;
   color: white;
   padding: 12px;
   border-radius: 7px;

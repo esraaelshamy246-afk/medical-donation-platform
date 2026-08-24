@@ -94,50 +94,64 @@
     }
   ],
   "requests": [
-    {
-      "id": 1,
-      "product": "Paracetamol",
-      "category": "Medicines",
-      "quantity": 10,
-      "patientName": "mohamed ali",
-      "phone":"01000000001",
-      "location": "Cairo",
-      "description": "Needed for a local patient support case.",
-      "priority": "Normal",
-      "status": "Pending",
-      "requesterId": 2,
-      "createdAt": "2026-08-10"
-    },
-    {
-      "id": 2,
-      "product": "Medical Supplies",
-      "category": "Medical Supplies",
-      "quantity": 10,
-      "patientName": "menna hassan",
-      "phone":"01000000991",
-      "location": "Mansoura",
-      "description": "Urgently needed medical supplies.",
-      "priority": "Urgent",
-      "status": "Under Review",
-      "requesterId": 2,
-      "createdAt": "2026-08-11"
-    },
-    {
-      "id": 3,
-      "product": "Blood Pressure Monitor",
-      "category": "Medical Equipment",
-      "quantity": 1,
-      "patientName": "Asmaa samir",
-      "phone":"01000007771",
-      "location": "Giza",
-      "description": "Required for home medical care.",
-      "priority": "Normal",
-      "status": "Matched",
-      "requesterId": 1,
-      "createdAt": "2026-08-12"
-    }
-  ],
-  "notifications": [
+  {
+    "id": 1,
+    "product": "Paracetamol",
+    "category": "Medicine",
+    "quantity": 50,
+    "patientName": "Mohamed Ali",
+    "phone": "01000000001",
+    "location": "Cairo",
+    "description": "Needed for a local patient support case.",
+    "priority": "Normal",
+    "status": "Pending",
+    "requesterId": 1,
+    "createdAt": "2026-08-20"
+  },
+  {
+    "id": 2,
+    "product": "Medical Supplies",
+    "category": "Medical Supplies",
+    "quantity": 10,
+    "patientName": "Menna Hassan",
+    "phone": "01000000091",
+    "location": "Mansoura",
+    "description": "Urgently needed medical supplies.",
+    "priority": "Urgent",
+    "status": "Under Review",
+    "requesterId": 2,
+    "createdAt": "2026-08-20"
+  },
+  {
+    "id": 3,
+    "product": "Blood Pressure Monitor",
+    "category": "Equipment",
+    "quantity": 3,
+    "patientName": "Ahmed Mohamed",
+    "phone": "01000000003",
+    "location": "Alexandria",
+    "description": "Blood pressure monitors needed for patients.",
+    "priority": "Normal",
+    "status": "Matched",
+    "requesterId": 3,
+    "createdAt": "2026-08-19"
+  },
+  {
+    "id": 4,
+    "product": "Insulin",
+    "category": "Medicine",
+    "quantity": 20,
+    "patientName": "Sara Ahmed",
+    "phone": "01000000004",
+    "location": "Giza",
+    "description": "Insulin needed urgently for a patient.",
+    "priority": "Urgent",
+    "status": "Pending",
+    "requesterId": 4,
+    "createdAt": "2026-08-18"
+  }
+],
+"notifications": [
     {
       "id": 1,
       "userId": 1,
