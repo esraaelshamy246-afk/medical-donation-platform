@@ -1,0 +1,38 @@
+[
+  {
+    "id": "d1",
+    "productName": "Cough Syrup 100ml",
+    "category": "First Aid",
+    "quantity": 5,
+    "location": "Cairo",
+    "submittedOn": "2026-08-12",
+    "status": "Approved"
+  },
+  {
+    "id": "d2",
+    "productName": "Surgical Masks (Box of 50)",
+    "category": "Medical Devices",
+    "quantity": 4,
+    "location": "Giza",
+    "submittedOn": "2026-08-18",
+    "status": "Pending"
+  },
+  {
+    "id": "d3",
+    "productName": "Ibuprofen 400mg",
+    "category": "Pain Relief",
+    "quantity": 30,
+    "location": "Alexandria",
+    "submittedOn": "2026-07-30",
+    "status": "Rejected"
+  },
+  {
+    "id": "d4",
+    "productName": "Wheelchair - Standard",
+    "category": "Medical Devices",
+    "quantity": 1,
+    "location": "Mansoura",
+    "submittedOn": "2026-07-05",
+    "status": "Completed"
+  }
+]
