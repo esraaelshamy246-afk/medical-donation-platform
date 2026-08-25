@@ -99,10 +99,9 @@ const fetchAndCombineData = async () => {
       const localRequests = JSON.parse(localStorage.getItem('user_requests') || '[]')
       const allRequests = [...(remoteData.requests || []), ...localRequests]
 
-      const userId = currentUserInfo.value.id
-      
-      myDonations.value = allDonations.filter(d => d.donorId === userId)
-      myRequests.value = allRequests.filter(r => r.requesterId === userId)
+      const userId = currentUserInfo.value.email || currentUserInfo.value.id
+       myDonations.value = allDonations.filter(d => d.donorId === userId)
+       myRequests.value = allRequests.filter(r => r.requesterId === userId)
     }
   } catch (error) {
     console.error('Error syncing dynamic data:', error)

@@ -1,0 +1,12 @@
+{
+  "categories": [
+    "Pain Relief",
+    "Antibiotics",
+    "Chronic Care",
+    "First Aid",
+    "Vitamins & Supplements",
+    "Medical Devices"
+  ],
+  "locations": ["Cairo", "Giza", "Alexandria", "Mansoura", "Aswan"],
+  "conditions": ["Sealed", "Opened - Unused", "Near Expiry"]
+}

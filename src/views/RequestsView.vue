@@ -146,6 +146,7 @@ const urgentRequests = computed(() => {
   return requests.value.filter(request => request.priority === 'Urgent')
 })
 
+
 const filteredRequests = computed(() => {
   return requests.value.filter(request => {
     const productMatch = request.product
@@ -484,7 +485,6 @@ const offerDonation = (request) => {
 }
 
 :deep(.modal-subtitle) {
-
   color: #6c757d;
   font-size: 14px;
   margin-bottom: 20px;

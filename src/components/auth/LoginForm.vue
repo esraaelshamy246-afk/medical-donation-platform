@@ -37,11 +37,12 @@ const errorMessage = ref('')
 const handleSubmit = () => {
   errorMessage.value = ''
 
-  const userSession = {
-    email: email.value,
-    fullName: email.value.split('@')[0],
-    accountType: 'Individual'
-  }
+ const userSession = {
+  id: email.value,
+  email: email.value,
+  fullName: email.value.split('@')[0],
+  accountType: 'Individual'
+}
 
   localStorage.setItem('user', JSON.stringify(userSession))
 
