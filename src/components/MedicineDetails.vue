@@ -15,8 +15,38 @@ function handleRequest() {
     emit("request-login");
     return;
   }
+
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  if (!user.id) {
+    emit("request-login");
+    return;
+  }
+
+  const requests = JSON.parse(
+    localStorage.getItem("user_requests") || "[]"
+  );
+
+  const newRequest = {
+    id: `r${Date.now()}`,
+    requesterId: user.id,
+    donationId: props.medicine.id,
+    productName: props.medicine.name,
+    category: props.medicine.category,
+    quantity: props.medicine.quantity,
+    location: props.medicine.location,
+    status: "Pending",
+    requestedOn: new Date().toISOString().slice(0, 10),
+  };
+
+  requests.push(newRequest);
+
+  localStorage.setItem(
+    "user_requests",
+    JSON.stringify(requests)
+  );
+
   requested.value = true;
-  // In a real app: POST /api/donations/:id/request
 }
 </script>
 

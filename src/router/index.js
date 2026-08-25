@@ -10,51 +10,74 @@ import AboutView from '../views/AboutView.vue'
 import ContactView from '../views/ContactView.vue'
 import FaqView from '../views/FaqView.vue'
 
+import MedicinesView from '../views/MedicinesView.vue'
+import DonationForm from '../components/DonationForm.vue'
+
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home
   },
+
+  {
+    path: '/medicines',
+    name: 'Medicines',
+    component: MedicinesView
+  },
+
   {
     path: '/auth',
     name: 'Auth',
     component: AuthView
   },
+
   {
     path: '/requests',
     name: 'Requests',
     component: RequestsView
   },
+
   {
     path: '/requests/:id',
     name: 'RequestDetails',
     component: RequestsView
   },
+
   {
     path: '/dashboard',
     name: 'UserDashboard',
     component: UserDashboardView
   },
+
   {
     path: '/admin',
     name: 'AdminDashboard',
     component: AdminDashboardView
   },
+
   {
     path: '/about',
     name: 'About',
     component: AboutView
   },
+
   {
     path: '/contact',
     name: 'Contact',
     component: ContactView
   },
+
   {
     path: '/faq',
     name: 'FAQ',
     component: FaqView
+  },
+
+  {
+    path: '/donate',
+    name: 'Donate',
+    component: DonationForm
   }
 ]
 

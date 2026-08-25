@@ -1,10 +1,16 @@
 <script setup>
 import StatusPill from "./StatusPill.vue";
 
-defineProps({
+const props = defineProps({
   medicine: { type: Object, required: true },
 });
-defineEmits(["view"]);
+
+const emit = defineEmits(["view"]);
+
+function handleView() {
+  console.log("VIEW BUTTON WORKED");
+  emit("view", props.medicine);
+}
 </script>
 
 <template>
@@ -54,10 +60,10 @@ defineEmits(["view"]);
         </div>
       </div>
 
-      <button
-        @click="$emit('view', medicine)"
-        class="mt-3 w-full rounded-full bg-[#0F5B4C] py-2.5 text-[13px] font-semibold text-[#F7F3E8] transition hover:bg-[#0C4A3E]"
-      >
+        <button
+         @click="handleView"
+         class="mt-3 w-full rounded-full bg-[#0F5B4C] py-2.5 text-[13px] font-semibold text-[#F7F3E8] transition hover:bg-[#0C4A3E]"
+        >
         View Details
       </button>
     </div>

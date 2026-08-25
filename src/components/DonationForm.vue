@@ -3,6 +3,10 @@ import { reactive, ref } from "vue";
 import options from "../data/options.json";
 import FormField from "./FormField.vue";
 
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 const emit = defineEmits(["submit", "back"]);
 
 const form = reactive({
@@ -57,21 +61,21 @@ function handleSubmit() {
       You'll be notified once it's approved and published.
     </p>
     <button
-      @click="$emit('back')"
-      class="mt-8 rounded-full bg-[#0F5B4C] px-6 py-3 text-[13px] font-semibold text-[#F7F3E8] hover:bg-[#0C4A3E]"
-    >
-      Back to Medicines
-    </button>
+  @click="router.push('/medicines')"
+  class="mt-8 rounded-full bg-[#0F5B4C] px-6 py-3 text-[13px] font-semibold text-[#F7F3E8] hover:bg-[#0C4A3E]"
+>
+  Back to Medicines
+</button>
   </div>
 
   <!-- Form state -->
   <div v-else class="mx-auto max-w-2xl px-6 py-10">
-    <button @click="$emit('back')" class="mb-6 flex items-center gap-1.5 text-[13px] font-semibold text-[#0F5B4C] hover:underline">
-      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
-        <path d="M15 18l-6-6 6-6" />
-      </svg>
-      Back
-    </button>
+    <button
+  @click="router.push('/medicines')"
+  class="mb-6 flex items-center gap-1.5 text-[13px] font-semibold text-[#0F5B4C] hover:underline"
+>
+ Back
+ </button>
 
     <div class="mb-3 flex items-center gap-3">
       <svg class="h-[14px] w-[14px] text-[#B5842A]" viewBox="0 0 24 24" fill="currentColor">

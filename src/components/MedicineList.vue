@@ -5,7 +5,11 @@ import SearchBar from "./SearchBar.vue";
 import Filter from "./Filter.vue";
 import MedicineCard from "./MedicineCard.vue";
 
-defineEmits(["view", "go-donate", "go-status"]);
+const emit = defineEmits(["view", "go-donate", "go-status"]);
+function handleView(medicine) {
+  console.log("MEDICINE LIST RECEIVED:", medicine);
+  emit("view", medicine);
+}
 
 // In a real app this would come from an API call; for now it's the local JSON file.
 const medicines = ref(medicinesData);
@@ -22,6 +26,11 @@ const results = computed(() => {
     const matchesStatus = !filters.value.status || m.status === filters.value.status;
     return matchesQuery && matchesCategory && matchesLocation && matchesStatus;
   });
+
+  function handleView(medicine) {
+  console.log("MEDICINE LIST RECEIVED:", medicine);
+  emit("view", medicine);
+  }
 
   list = [...list].sort((a, b) => {
     if (sort.value === "expiry") {
@@ -96,7 +105,7 @@ const results = computed(() => {
         v-for="m in results"
         :key="m.id"
         :medicine="m"
-        @view="$emit('view', $event)"
+        @view="handleView"
       />
     </div>
   </div>
